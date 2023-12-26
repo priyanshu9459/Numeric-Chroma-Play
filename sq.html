@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<title>Web Page Design</title>
+
+<head>
+  <style type="text/css">
+
+table, th, td {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+    body {
+      margin: 30px;
+    }
+   
+   
+    .selected {
+      -webkit-animation: bgcolorchange 4s infinite; /* Chrome, Safari, Opera */ 
+  animation: 4s infinite bgcolorchange;
+}
+@keyframes bgcolorchange {
+  0% {
+    background-color: red;
+  }
+  25% {
+    background-color: green;
+  }
+  50% {
+    background-color: yellow;
+  }
+  75% {
+    background-color: yellow;
+  }
+  100% {
+    background-color: red;
+  }
+}
+/* Chrome, Safari, Opera */
+ @-webkit-keyframes bgcolorchange {
+      0%   {background: red;}
+      25%  {background: yellow;}
+      75%  {background: green;}
+      100% {background: blue;}
+ }
+ 
+   
+  </style>
+</head>
+
+<body>
+  <table id="myTable" border="1" class="rounded">
+
+  </table>
+  <form>
+    <input id="input"></input>
+    <button type="button" onclick="createTable()" value="Create the table"> click</button>
+    <button type="button" onclick="myclick()" value="Create the table"> click</button>
+
+    <script>
+      var cn=0;
+     var t = 0;
+      function createTable() {
+
+        cn = document.getElementById('input').value;
+
+        for (var r = 0; r < parseInt(cn); r++) {
+          var x = document.getElementById('myTable').insertRow(r);
+          var tr = x.setAttribute("id", "demo_" + r);
+          
+          for (var c = 0; c < parseInt(cn); c++) {
+
+            var y = x.insertCell(c);
+            y.style.height = "50px";
+            y.style.width = "50px";
+            var tv = y.setAttribute("class", "class");
+            y.setAttribute("id", "id_" + t);
+            t++;
+          }
+          
+
+        }
+      
+        $(function () {
+          $(document).on("click", "table tr td", function () {
+            var color;
+            $(".class").removeClass("selected");
+            $(this).css('background-color', color);
+            $(this).addClass("selected");
+          });
+        });
+
+
+        $(document).ready(function () {
+          $("#input").click(function () {
+            location.reload(true);
+          });
+        });
+
+      }
+     
+      data = 0;
+      ts = -1;
+      function myclick(){
+        if(data > t){
+         data = 0;
+         ts = -1;
+         var abc = $('#id_' + data).addClass("selected");
+        $('#id_' + ts).removeClass("selected");
+        }else{
+          
+        var abc = $('#id_' + data).addClass("selected");
+        $('#id_' + ts).removeClass("selected");
+        console.log(abc);
+       
+      }
+     
+       data++;
+      
+       ts++;
+       setTimeout(myclick, 1000);
+      
+        
+        
+      }
+    
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</body>
+
+</html>
